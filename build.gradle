@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id "org.springframework.boot" version "2.2.1.RELEASE"
+    id "io.spring.dependency-management" version "1.0.8.RELEASE"
+    id "com.gorylenko.gradle-git-properties" version "2.2.0"
+}
+
+group = 'Playground'
+version = '0.0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-actuator')
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-security')
+    implementation('org.springframework.security:spring-security-oauth2-resource-server')
+    implementation('org.springframework.security:spring-security-oauth2-jose:5.2.1.RELEASE')
+    implementation("org.springframework.boot:spring-boot-starter-undertow")
+    implementation("org.apache.httpcomponents:httpclient")
+    runtime("io.micrometer:micrometer-registry-prometheus")
+
+    // Lombok annotations
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+
+    // JAXB Bindings
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    compile group: 'javax.xml.registry', name: 'javax.xml.registry-api', version: '1.0.8'
+    compile group: 'javax.activation', name: 'activation', version: '1.1.1'
+    compile group: 'org.glassfish.jaxb', name: 'jaxb-runtime', version: '2.3.2'
+
+    // MQ Listener
+    implementation('com.ibm.mq:mq-jms-spring-boot-starter:2.1.2')
+
+    // MQ Test
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.boot:spring-boot-starter-artemis')
+    testImplementation('org.apache.activemq:artemis-jms-server')
+    compile group: 'org.apache.activemq', name: 'activemq-core', version: '5.7.0'
+}
